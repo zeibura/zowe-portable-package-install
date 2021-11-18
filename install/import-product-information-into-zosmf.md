@@ -47,22 +47,89 @@ After the file is loaded, you can then retrieve the product information in z/OSM
 Use the following procedure to load the contents of the Broadcom product information file into z/OSMF directly from the Broadcom FTP directory.
 
 1. Log in to the z/OSMF web interface.  
-Complete either of the following steps:
-In the Desktop Interface, select Software Management.
-In the Classic Interface, select Software, Software Management.
-The Software Management dashboard displays.
-Select Products.
+2. Complete *either* of the following steps:
+    - In the **Desktop Interface**, select **Software Management**.
+    - In the **Classic Interface**, select **Software**, **Software Management**.  
+    The Software Management dashboard displays.
+3. Select **Products**.  
 The Products table list is displayed.
-Select Retrieve End of Service Information from the Actions menu or select the Retrieve End of Service Information button if available.
+4. Select **Retrieve End of Service Information** from the Actions menu or select the Retrieve End of Service Information button if available.  
 The Select Product Information File page displays.
-Complete the following steps:
-Select the option to Select files that reside on or can be accessed by primary system and select Add from the Actions drop-down menu under Product Information Files.
+5. Select the option to **Select files that reside on or can be accessed by primary system** and select **Add** from the Actions drop-down menu under Product Information Files.  
 The Add Product Information File page is displayed.
-Select URL and then specify the following URL in the URL field.
-https://ftpdocs.broadcom.com/WebInterface/phpdocs/0/MSPSaccount/COMPAT/BroadcomProdInfo.txt
-Specify a description in the Description field.
-Select OK.
+6. Select **URL** and then specify the following URL in the **URL** field.  
+`https://ftpdocs.broadcom.com/WebInterface/phpdocs/0/MSPSaccount/COMPAT/BroadcomProdInfo.txt`
+7. Specify a description in the **Description** field.
+8. Select **OK**.  
 The product information file table is updated with the new URL.
-Select the new URL and select Retrieve.
+9. Select the new URL and select **Retrieve**.  
 The contents of the file are loaded into z/OSMF.
+
 You can now view the Broadcom product information that has been retrieved from the Software Management dashboard.
+
+## Load the File from Your Local Workstation
+
+Use the following procedure to load the contents of the Broadcom product information file into z/OSMF from your local workstation.
+
+1. Download the product information file from the following Broadcom FTP directory to your local workstation using your Web Browser or an FTP client:  
+`https://ftpdocs.broadcom.com/WebInterface/phpdocs/0/MSPSaccount/COMPAT/BroadcomProdInfo.txt`
+2. Log in to the z/OSMF web interface.
+3. Complete *either* of the following steps:
+    - In the Desktop Interface, select **Software Management**.
+    - In the Classic Interface, select **Software**, **Software Management**.  
+    The Software Management dashboard displays.
+4. Select **Products**.  
+The Products table list displays.
+5. Select **Retrieve End of Service Information** from the Actions menu.  
+The Select Product Information File page displays.
+6. Select the option to **Select a file that resides** on your local workstation, enter your file name and description, and select **Retrieve**.  
+The contents of the file are loaded into z/OSMF.
+
+You can now view the product information that has been retrieved from the Software Management dashboard.
+
+## Load the File from a z/OS Data Set or UNIX File
+
+Use the following procedure to load the contents of the Broadcom product information file into z/OSMF from a z/OS data set or UNIX file that the primary z/OSMF host can access.
+
+1. Use FTP to download the product information file directly to the mainframe.  
+    - **Note**: Upload the file with binary in the FTP JCL so that the file is not converted to the EBCDIC character set.  
+Sample JCL follows that you can customize and execute:  
+`//FTPSTEP  EXEC PGM=FTP,PARM='(EXIT=08'`  
+`//SYSTCPD  DD DSN=your_TCP/IP_data_set_name,DISP=SHR`  
+`//SYSPRINT DD SYSOUT=*`     
+`//OUTPUT   DD SYSOUT=*`  
+`//INPUT    DD *`   
+`ftp.broadcom.com 21`   
+`anonymous email_address`   
+`cd /pub/MSPSaccount/JSON/`   
+`dir`   
+`asc`   
+`locsite LR=80 REC=FB BLOCKSI=0`   
+`locsite PRI=20 SEC=10 CY`   
+`get BroadcomProdInfo.txt 'z/OS_data_set' (REPLACE`  
+    - **your_TCP/IP_data_set_name**  
+    Specify the TCP/IP stack for an external network.
+    - **email_address**
+    Specify your valid email address.
+    - **z/OS_data_set**
+    Specify the z/OS data set name where you want to save the product information file. If the specified data set does not exist, it is created during the download process.
+2. Log in to the z/OSMF web interface.
+3. Complete *either* of the following steps:  
+    - In the Desktop Interface, select **Software Management**.
+    - In the Classic Interface, select **Software**, **Software Management**.  
+The Software Management dashboard displays.
+4. Select **Products**.  
+The Products table list displays.
+5. Select **Retrieve End of Service Information** from the Actions menu or select the Retrieve End of Service Information button if available.  
+The Select Product Information File page displays.
+6. Complete the following fields:
+    1. Select the option to **Select files that reside on or can be accessed by primary system** and select **Add** from the Actions drop-down menu under Product Information Files.  
+    The Add Product Information File page displays.
+    2. Select **Primary z/OSMF system** and specify the *z/OS_data_set_name* in the **Data set** or **UNIX file** field.  
+        - **Note**: The primary z/OSMF host system must be able to access the specified data set or UNIX file.
+    3. Specify a description in the Description field and select OK.  
+    The product information file table is updated with the new URL.
+7. Select the new URL and select **Retrieve**.  
+The contents of the file are loaded into z/OSMF.
+
+You can now view the product information that has been retrieved from the Software Management dashboard.
