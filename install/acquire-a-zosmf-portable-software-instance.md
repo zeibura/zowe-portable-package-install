@@ -8,7 +8,7 @@ The following diagram illustrates the acquisition process:
 
 When you complete the acquisition process, the product software is ready for installation using z/OSMF Deployments.
 
-> **Note**: Before you begin the acquisition process, ensure that you address the z/OSMF requirements.
+- **Note**: Before you begin the acquisition process, ensure that you address the z/OSMF requirements.
 
 The z/OSMF product acquisition process consists of the following tasks.
 
@@ -17,7 +17,7 @@ The z/OSMF product acquisition process consists of the following tasks.
 
 Refer to the sections below for instructions.
 
-> **Note**: For a list of Broadcom mainframe products that provide a z/OSMF package, see [Mainframe Products using z/OSMF for Software Management](https://techdocs.broadcom.com/us/en/ca-mainframe-software/traditional-management/mainframe-common-maintenance-procedures/1-0/getting-started/z-osmf-requirements/mainframe-products-using-z-osmf-for-software-management.html).
+- **Note**: For a list of Broadcom mainframe products that provide a z/OSMF package, see [Mainframe Products using z/OSMF for Software Management](https://techdocs.broadcom.com/us/en/ca-mainframe-software/traditional-management/mainframe-common-maintenance-procedures/1-0/getting-started/z-osmf-requirements/mainframe-products-using-z-osmf-for-software-management.html).
 
 ## Order the z/OSMF Portable Software Instance
 
@@ -39,13 +39,13 @@ The product-specific packages are displayed on the Primary Downloads tab. The Ad
     - **Warning**: To ensure that you have the files that you want, ***do not*** select **Add All to Cart** or **Download Package**.  
 Select the **Add to Cart** option, **HTTPS**, or **FTP**. FTP is the preferred download method. For download tips, see [Download & Search Solution Help](https://knowledge.broadcom.com/external/article/142936).
 6. Execute JCL to unpack the installation file and restore the individual pax files. Sample JCL follows:  
-` //USSBATCH EXEC PGM=BPXBATCH,
-//STDOUT   DD=SYSOUT=*
-//STDERR   DD=SYSOUT=*
-//STDPARM  DD=SYSOUT=*
-sh cd /yourUSSpaxdirectory/; 
-pax -rvf yourpaxfilename.ZOSMF.pax.Z
-/*`  
+` //USSBATCH EXEC PGM=BPXBATCH,`  
+`//STDOUT   DD=SYSOUT=*`  
+`//STDERR   DD=SYSOUT=*`  
+`//STDPARM  DD=SYSOUT=*`  
+`sh cd /yourUSSpaxdirectory/;`  
+`pax -rvf yourpaxfilename.ZOSMF.pax.Z`  
+`/*`  
 Customize the sample JCL as follows and then submit for execution:
     1. Add a JOB statement.
     2. Update the USS directory (*yourUSSpaxdirectory*) with the path name where you want to copy the pax file.
