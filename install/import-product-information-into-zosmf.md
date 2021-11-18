@@ -20,15 +20,13 @@ If you use FTP, use the following FTP commands to avoid truncation:
     `SET PROFILE(USER) DIV(CERTDATA)`  
     `INSERT CERTAUTH.yourcertname DSN('your.zos.dataset.name') -`  
     `LABEL(yourlabeldescription)`  
-    ``     
     `CONNECT CERTDATA(CERTAUTH.yourDigicertCAcertname) KEYRING(IZUSVR.keyr01) RINGNAME(IZUKeyring.IZUDFLT) USAGE(CERTAUTH)`
-    - **For Top Secret, specify:**
+    - **For Top Secret, specify:**  
     `TSS ADD(CERTAUTH) DIGICERT(yourDigicertCAcertname) LABLCERT(yourlabelname) - `  
     `DCDSN('your.zos.dataset.name') TRUST`  
-    ``             
     `TSS ADD(IZUSVR) KEYRING(zosmfringname) RINGDATA(CERTAUTH,yourDigicertCAcertname) - `  
     `USAGE(CERTAUTH)`
-    - **For IBM RACF, specify:**
+    - **For IBM RACF, specify:**  
     `RACDCERT CERTAUTH ADD('your.zos.dataset.name') WITHLABEL('yourlabelname') TRUST`  
     `RACDCERT ID(IZUSVR) CONNECT(CERTAUTH LABEL('your_digicertCA_label') +`  
     `RING(keyringname) USAGE(CERTAUTH))`
@@ -91,8 +89,7 @@ You can now view the product information that has been retrieved from the Softwa
 
 Use the following procedure to load the contents of the Broadcom product information file into z/OSMF from a z/OS data set or UNIX file that the primary z/OSMF host can access.
 
-1. Use FTP to download the product information file directly to the mainframe.  
-    - **Note**: Upload the file with binary in the FTP JCL so that the file is not converted to the EBCDIC character set.  
+1. Use FTP to download the product information file directly to the mainframe. Upload the file with binary in the FTP JCL so that the file is not converted to the EBCDIC character set.  
 Sample JCL follows that you can customize and execute:  
 `//FTPSTEP  EXEC PGM=FTP,PARM='(EXIT=08'`  
 `//SYSTCPD  DD DSN=your_TCP/IP_data_set_name,DISP=SHR`  
